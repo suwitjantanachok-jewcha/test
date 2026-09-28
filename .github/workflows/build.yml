@@ -9,16 +9,21 @@ jobs:
         with:
           distribution: 'temurin'
           java-version: '17'
+
       - name: Create keystore
         run: |
           keytool -genkey -v -keystore debug.keystore -alias androiddebugkey -keyalg RSA -keysize 2048 -validity 10000 -storepass android -keypass android -dname "CN=Debug"
           cp debug.keystore app/debug.keystore
-          mkdir -p app
-          echo '{"project_info":{},"client":[],"configuration_version":"1"}' > app/google-services.json
+
+      - name: Create dummy google file
+        run: |
+          echo "{}" > app/google-services.json
+
       - name: Build
         run: |
           chmod +x gradlew
          ./gradlew assembleDebug
+
       - name: Upload
         uses: actions/upload-artifact@v4
         with:
