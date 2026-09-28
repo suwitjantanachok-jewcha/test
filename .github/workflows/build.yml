@@ -1,6 +1,5 @@
-name: Build & Package Debug APK
+name: Build Debug APK
 on: [push]
-
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -12,19 +11,22 @@ jobs:
         with:
           distribution: 'temurin'
           java-version: '17'
+          cache: 'gradle'
 
-      - name: Create missing debug keystore
+      - name: Create debug keystore
         run: |
-          keytool -genkey -v -keystore debug.keystore -alias androiddebugkey -keyalg RSA -keysize 2048 -validity 10000 -storepass android -keypass android -dname "CN=Debug, OU=Debug, O=Debug, L=Debug, S=Debug, C=US"
-          keytool -genkey -v -keystore app/debug.keystore -alias androiddebugkey -keyalg RSA -keysize 2048 -validity 10000 -storepass android -keypass android -dname "CN=Debug, OU=Debug, O=Debug, L=Debug, S=Debug, C=US" || true
+          keytool -genkey -v -keystore app/debug.keystore -alias androiddebugkey -keyalg RSA -keysize 2048 -validity 10000 -storepass android -keypass android -dname "CN=Android Debug,O=Android,C=US"
+          ls -l app/debug.keystore
 
-      - name: Build Debug APK with Gradle
-        run: |
-          chmod +x gradlew
-         ./gradlew assembleDebug --stacktrace
+      - name: Grant execute permission for gradlew
+        run: chmod +x gradlew
 
-      - name: Upload Debug APK
+      - name: Build Debug APK
+        run:./gradlew assembleDebug --stacktrace --no-daemon
+
+      - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
           name: bible-quiz-debug-apk
           path: app/build/outputs/apk/debug/app-debug.apk
+          retention-days: 30
