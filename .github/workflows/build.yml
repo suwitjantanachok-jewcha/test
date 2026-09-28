@@ -25,21 +25,31 @@ jobs:
 
       - name: Setup debug keystore & environment
         run: |
+          # สร้าง .env หากยังไม่มี
           if [ ! -f .env ] && [ -f .env.example ]; then
             cp .env.example .env
           fi
+          # สร้าง debug.keystore ไว้ที่ root directory
           if [ -f debug.keystore.base64 ]; then
             base64 -d debug.keystore.base64 > debug.keystore
           else
             keytool -genkey -v -keystore debug.keystore -alias androiddebugkey -keyalg RSA -keysize 2048 -validity 10000 -storepass android -keypass android -dname "CN=Android Debug,O=Android,C=US"
           fi
 
-      - name: Grant execute permission for gradlew
+      - name: Ensure Gradle 9.3.1 wrapper
         run: |
-          if [ ! -f gradlew ]; then
-            gradle wrapper
-          fi
-          chmod +x gradlew
+          # บังคับใช้ Gradle 9.3.1 ตามที่ Android Gradle Plugin 9.1.1 ต้องการ
+          mkdir -p gradle/wrapper
+          cat << 'EOF' > gradle/wrapper/gradle-wrapper.properties
+          distributionBase=GRADLE_USER_HOME
+          distributionPath=wrapper/dists
+          distributionUrl=https\://services.gradle.org/distributions/gradle-9.3.1-bin.zip
+          networkTimeout=10000
+          validateDistributionUrl=true
+          zipStoreBase=GRADLE_USER_HOME
+          zipStorePath=wrapper/dists
+          EOF
+          chmod +x gradlew || true
 
       - name: Build Debug APK with Gradle
         run: ./gradlew assembleDebug --no-daemon --stacktrace
