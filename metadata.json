@@ -1,0 +1,6 @@
+{
+  "name": "แบบทดสอบไบเบิล",
+  "description": "แอพแบบทดสอบความรู้พระคัมภีร์ไบเบิล ฉบับมาตรฐาน (THSV11) ทั้งพันธสัญญาเดิมและพันธสัญญาใหม่ พร้อมเฉลย บันทึกคะแนน และเมนูสนับสนุนช่อง YouTube jewcha",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
