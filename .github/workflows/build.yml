@@ -10,21 +10,27 @@ jobs:
           distribution: 'temurin'
           java-version: '17'
 
-      - name: Fix keystore - create at root where it looks
+      - name: Fix - create keystore at exact path it wants
         run: |
-          pwd
-          ls -la
-          keytool -genkey -v -keystore debug.keystore -alias androiddebugkey -keyalg RSA -keysize 2048 -validity 10000 -storepass android -keypass android -dname "CN=Android Debug,O=Android,C=US"
+          keytool -genkey -v -keystore debug.keystore -alias androiddebugkey -keyalg RSA -keysize 2048 -validity 10000 -storepass android -keypass android -dname "CN=Debug"
           mkdir -p app
           cp debug.keystore app/debug.keystore
+          echo "Created:"
           ls -lh debug.keystore app/debug.keystore
+
+      - name: Fix - create dummy google-services.json
+        run: |
+          mkdir -p app/src/debug
+          echo '{"project_info":{},"client":[],"configuration_version":"1"}' > app/google-services.json
+          echo '{"project_info":{},"client":[],"configuration_version":"1"}' > app/src/debug/google-services.json
 
       - name: Build APK
         run: |
           chmod +x gradlew
-         ./gradlew assembleDebug --stacktrace --no-daemon
+        ./gradlew assembleDebug --stacktrace --no-daemon
 
       - name: Upload APK
+        if: always()
         uses: actions/upload-artifact@v4
         with:
           name: bible-quiz-debug-apk
