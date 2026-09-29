@@ -1,0 +1,1662 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>แบบทดสอบไบเบิล - Bible Quiz THSV11</title>
+  <meta name="description" content="แบบทดสอบความรู้พระคริสตธรรมคัมภีร์ ฉบับมาตรฐาน (THSV11) เล่นออนไลน์ฟรี ทั้งพันธสัญญาเดิม พันธสัญญาใหม่ และบุคคลสำคัญ">
+  <meta name="theme-color" content="#1e3a8a">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📖</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --primary: #1e40af;
+      --primary-light: #3b82f6;
+      --primary-dark: #172554;
+      --accent: #d97706;
+      --accent-light: #fbbf24;
+      --accent-gold: #f59e0b;
+      --bg: #f8fafc;
+      --card-bg: #ffffff;
+      --text: #0f172a;
+      --text-muted: #64748b;
+      --border: #e2e8f0;
+      --success: #16a34a;
+      --success-light: #dcfce7;
+      --danger: #dc2626;
+      --danger-light: #fee2e2;
+      --yt-red: #ef4444;
+      --radius: 16px;
+      --shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.06), 0 2px 6px -1px rgba(0, 0, 0, 0.04);
+      --font: 'Sarabun', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    }
+
+    [data-theme="dark"] {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --border: #334155;
+      --primary: #3b82f6;
+      --primary-light: #60a5fa;
+      --primary-dark: #1d4ed8;
+      --shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.4);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+      font-family: var(--font);
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      transition: background 0.3s ease, color 0.3s ease;
+      overflow-x: hidden;
+    }
+
+    #app-container {
+      width: 100%;
+      max-width: 520px;
+      min-height: 100vh;
+      background: var(--bg);
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      box-shadow: 0 0 40px rgba(0, 0, 0, 0.05);
+    }
+
+    /* Header */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 40;
+      background: var(--card-bg);
+      border-bottom: 1px solid var(--border);
+      padding: 12px 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      backdrop-filter: blur(10px);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 800;
+      font-size: 1.15rem;
+      color: var(--primary);
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    .brand-icon {
+      font-size: 1.5rem;
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .icon-btn {
+      background: none;
+      border: 1px solid var(--border);
+      color: var(--text);
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      transition: all 0.2s;
+    }
+
+    .icon-btn:hover {
+      background: var(--border);
+    }
+
+    /* Content Area */
+    main {
+      flex: 1;
+      padding: 16px 18px 80px;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    /* Cards */
+    .card {
+      background: var(--card-bg);
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      padding: 18px;
+      box-shadow: var(--shadow);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    /* Hero Banner */
+    .hero-banner {
+      background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 50%, #d97706 100%);
+      color: white;
+      border-radius: 20px;
+      padding: 22px;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 10px 25px -5px rgba(37, 99, 235, 0.35);
+    }
+
+    .hero-banner::after {
+      content: '✝';
+      position: absolute;
+      right: -10px;
+      bottom: -30px;
+      font-size: 140px;
+      color: rgba(255, 255, 255, 0.08);
+      font-weight: 900;
+      pointer-events: none;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(6px);
+      padding: 4px 10px;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      margin-bottom: 10px;
+    }
+
+    .hero-title {
+      font-size: 1.45rem;
+      font-weight: 800;
+      line-height: 1.3;
+      margin-bottom: 6px;
+    }
+
+    .hero-desc {
+      font-size: 0.85rem;
+      opacity: 0.9;
+      line-height: 1.5;
+    }
+
+    /* Daily Verse Card */
+    .verse-card {
+      border-left: 4px solid var(--accent);
+      background: var(--card-bg);
+    }
+
+    .verse-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--accent);
+      text-transform: uppercase;
+    }
+
+    .verse-text {
+      font-size: 0.95rem;
+      line-height: 1.6;
+      font-weight: 500;
+      color: var(--text);
+      font-style: italic;
+      margin-bottom: 8px;
+    }
+
+    .verse-ref {
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      text-align: right;
+    }
+
+    /* Section Title */
+    .section-title {
+      font-size: 1.1rem;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 4px;
+    }
+
+    .section-title span {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    /* Category Grid */
+    .categories-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+
+    .category-btn {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 16px 14px;
+      text-align: left;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      transition: all 0.2s ease;
+      box-shadow: var(--shadow);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .category-btn:hover, .category-btn:active {
+      transform: translateY(-2px);
+      border-color: var(--primary-light);
+      box-shadow: 0 8px 20px rgba(59, 130, 246, 0.15);
+    }
+
+    .cat-icon {
+      font-size: 1.8rem;
+      margin-bottom: 2px;
+    }
+
+    .cat-title {
+      font-weight: 700;
+      font-size: 0.95rem;
+      color: var(--text);
+    }
+
+    .cat-desc {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      line-height: 1.3;
+    }
+
+    .category-btn.featured {
+      grid-column: span 2;
+      background: linear-gradient(135deg, rgba(217, 119, 6, 0.1) 0%, rgba(245, 158, 11, 0.05) 100%);
+      border: 1.5px solid var(--accent);
+      flex-direction: row;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .category-btn.featured .cat-icon {
+      font-size: 2.3rem;
+      margin-bottom: 0;
+    }
+
+    /* Bottom Navigation */
+    nav.bottom-nav {
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      max-width: 520px;
+      background: var(--card-bg);
+      border-top: 1px solid var(--border);
+      display: flex;
+      justify-content: space-around;
+      padding: 8px 12px 14px;
+      z-index: 50;
+      backdrop-filter: blur(10px);
+    }
+
+    .nav-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      font-size: 0.72rem;
+      font-weight: 600;
+      cursor: pointer;
+      padding: 4px 12px;
+      border-radius: 12px;
+      transition: all 0.2s;
+    }
+
+    .nav-item.active {
+      color: var(--primary);
+    }
+
+    .nav-item .nav-icon {
+      font-size: 1.25rem;
+    }
+
+    /* Screen Transitions */
+    .screen {
+      display: none;
+      flex-direction: column;
+      gap: 18px;
+      animation: fadeIn 0.25s ease-out;
+    }
+
+    .screen.active {
+      display: flex;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Quiz Screen Components */
+    .quiz-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .progress-bar-container {
+      flex: 1;
+      height: 8px;
+      background: var(--border);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .progress-bar {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, var(--primary) 0%, var(--accent) 100%);
+      transition: width 0.3s ease;
+    }
+
+    .timer-badge {
+      font-weight: 800;
+      font-size: 0.85rem;
+      padding: 4px 10px;
+      border-radius: 20px;
+      background: var(--border);
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .timer-badge.urgent {
+      background: var(--danger-light);
+      color: var(--danger);
+      animation: pulse 1s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.6; }
+    }
+
+    .question-card {
+      background: var(--card-bg);
+      border-radius: 20px;
+      padding: 24px 20px;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+    }
+
+    .q-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      margin-bottom: 12px;
+    }
+
+    .q-text {
+      font-size: 1.15rem;
+      font-weight: 700;
+      line-height: 1.5;
+      color: var(--text);
+    }
+
+    .options-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .option-btn {
+      width: 100%;
+      background: var(--card-bg);
+      border: 1.5px solid var(--border);
+      border-radius: 14px;
+      padding: 14px 16px;
+      text-align: left;
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--text);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      transition: all 0.2s;
+    }
+
+    .option-btn:hover {
+      border-color: var(--primary-light);
+      background: rgba(59, 130, 246, 0.03);
+    }
+
+    .option-btn .opt-badge {
+      width: 28px;
+      height: 28px;
+      border-radius: 8px;
+      background: var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      flex-shrink: 0;
+    }
+
+    .option-btn.correct {
+      border-color: var(--success);
+      background: var(--success-light);
+      color: var(--success);
+    }
+
+    .option-btn.correct .opt-badge {
+      background: var(--success);
+      color: white;
+    }
+
+    .option-btn.wrong {
+      border-color: var(--danger);
+      background: var(--danger-light);
+      color: var(--danger);
+    }
+
+    .option-btn.wrong .opt-badge {
+      background: var(--danger);
+      color: white;
+    }
+
+    .option-btn:disabled {
+      cursor: default;
+    }
+
+    /* Explanation Box */
+    .explanation-card {
+      display: none;
+      background: var(--card-bg);
+      border-radius: 16px;
+      padding: 16px;
+      border-left: 4px solid var(--primary);
+      box-shadow: var(--shadow);
+    }
+
+    .explanation-card.active {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      animation: fadeIn 0.3s ease;
+    }
+
+    .exp-title {
+      font-weight: 800;
+      font-size: 0.9rem;
+      color: var(--primary);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .exp-body {
+      font-size: 0.88rem;
+      line-height: 1.5;
+      color: var(--text);
+    }
+
+    .exp-ref {
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      align-self: flex-end;
+    }
+
+    .action-btn {
+      width: 100%;
+      background: var(--primary);
+      color: white;
+      border: none;
+      border-radius: 14px;
+      padding: 14px;
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      box-shadow: 0 4px 14px rgba(30, 64, 175, 0.3);
+      transition: all 0.2s;
+    }
+
+    .action-btn:hover, .action-btn:active {
+      transform: translateY(-1px);
+      box-shadow: 0 6px 18px rgba(30, 64, 175, 0.4);
+    }
+
+    /* Result Screen */
+    .result-card {
+      text-align: center;
+      padding: 32px 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .score-circle {
+      width: 130px;
+      height: 130px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      box-shadow: 0 10px 25px rgba(30, 64, 175, 0.3);
+    }
+
+    .score-number {
+      font-size: 2.4rem;
+      font-weight: 900;
+      line-height: 1;
+    }
+
+    .score-total {
+      font-size: 0.85rem;
+      opacity: 0.9;
+    }
+
+    .stats-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      width: 100%;
+    }
+
+    .stat-box {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 12px 6px;
+      text-align: center;
+    }
+
+    .stat-val {
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: var(--text);
+    }
+
+    .stat-lbl {
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+
+    /* YouTube Creator Support Card */
+    .yt-card {
+      background: linear-gradient(135deg, #fee2e2 0%, #ffffff 100%);
+      border: 1.5px solid #fecaca;
+      border-radius: 20px;
+      padding: 20px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+    }
+
+    [data-theme="dark"] .yt-card {
+      background: linear-gradient(135deg, #450a0a 0%, #1e293b 100%);
+      border-color: #7f1d1d;
+    }
+
+    .yt-avatar {
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      background: #ff0000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 2rem;
+      box-shadow: 0 8px 16px rgba(255, 0, 0, 0.3);
+    }
+
+    .yt-btn {
+      background: #ff0000;
+      color: white;
+      text-decoration: none;
+      padding: 12px 24px;
+      border-radius: 30px;
+      font-weight: 800;
+      font-size: 0.95rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 4px 14px rgba(255, 0, 0, 0.35);
+      transition: transform 0.2s;
+    }
+
+    .yt-btn:hover {
+      transform: scale(1.03);
+    }
+
+    /* Toast */
+    #toast {
+      position: fixed;
+      bottom: 80px;
+      left: 50%;
+      transform: translateX(-50%) translateY(100px);
+      background: #1e293b;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 30px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.25);
+      z-index: 100;
+      opacity: 0;
+      transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+      pointer-events: none;
+    }
+
+    #toast.show {
+      transform: translateX(-50%) translateY(0);
+      opacity: 1;
+    }
+
+    /* Modal Review */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(4px);
+      display: none;
+      align-items: flex-end;
+      justify-content: center;
+      z-index: 99;
+    }
+
+    .modal-overlay.active {
+      display: flex;
+    }
+
+    .modal-content {
+      background: var(--card-bg);
+      width: 100%;
+      max-width: 520px;
+      max-height: 85vh;
+      border-radius: 24px 24px 0 0;
+      padding: 20px 18px 30px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      animation: slideUp 0.3s ease;
+    }
+
+    @keyframes slideUp {
+      from { transform: translateY(100%); }
+      to { transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+  <div id="app-container">
+    <!-- Header -->
+    <header>
+      <div class="brand" onclick="navigate('home')">
+        <span class="brand-icon">📖</span>
+        <span>แบบทดสอบไบเบิล</span>
+      </div>
+      <div class="header-actions">
+        <button class="icon-btn" onclick="toggleTheme()" title="สลับธีม สว่าง/มืด" id="theme-btn">🌙</button>
+        <button class="icon-btn" onclick="shareApp()" title="แชร์เว็บ">🔗</button>
+      </div>
+    </header>
+
+    <!-- Content Area -->
+    <main>
+      <!-- ================= 1. HOME SCREEN ================= -->
+      <section id="screen-home" class="screen active">
+        <!-- Hero Banner -->
+        <div class="hero-banner">
+          <div class="hero-badge">THSV11 • ฉบับมาตรฐาน</div>
+          <h1 class="hero-title">ทดสอบความรู้พระคัมภีร์</h1>
+          <p class="hero-desc">เรียนรู้พระวจนะ เสริมสร้างชีวิตฝ่ายวิญญาณ ผ่านคำถามพันธสัญญาเดิมและใหม่ 30 ข้อ</p>
+        </div>
+
+        <!-- Daily Verse -->
+        <div class="card verse-card" id="daily-verse-box">
+          <div class="verse-header">
+            <span>✨ ข้อพระคัมภีร์ประจำวัน</span>
+            <button class="icon-btn" style="width:26px; height:26px; font-size:0.75rem;" onclick="refreshVerse()" title="สุ่มข้อใหม่">🔄</button>
+          </div>
+          <div class="verse-text" id="verse-text">"เพราะว่าพระเจ้าทรงรักโลก จนได้ทรงประทานพระบุตรองค์เดียวของพระองค์ เพื่อทุกคนที่วางใจในพระบุตรนั้นจะไม่พินาศ แต่มีชีวิตนิรันดร์"</div>
+          <div class="verse-ref" id="verse-ref">ยอห์น 3:16 (THSV11)</div>
+        </div>
+
+        <!-- Mode Selection -->
+        <div class="section-title">
+          <span>🎯 เลือกหมวดหมู่แบบทดสอบ</span>
+          <span style="font-size:0.8rem; color:var(--text-muted);">30 ข้อพร้อมเฉลย</span>
+        </div>
+
+        <div class="categories-grid">
+          <!-- Timed Challenge -->
+          <div class="category-btn featured" onclick="startQuiz('TIMED_CHALLENGE')">
+            <div class="cat-icon">⚡</div>
+            <div>
+              <div class="cat-title">ท้าทายจับเวลา 15 วินาที</div>
+              <div class="cat-desc">สปีดควิซ 10 ข้อ ชิงคะแนนและความไว</div>
+            </div>
+          </div>
+
+          <!-- All -->
+          <div class="category-btn" onclick="startQuiz('ALL')">
+            <div class="cat-icon">🌟</div>
+            <div class="cat-title">รวมทุกหมวด</div>
+            <div class="cat-desc">สุ่มข้อสอบจากทุกตอน 10 ข้อ</div>
+          </div>
+
+          <!-- Old Testament -->
+          <div class="category-btn" onclick="startQuiz('OLD_TESTAMENT')">
+            <div class="cat-icon">📜</div>
+            <div class="cat-title">พันธสัญญาเดิม</div>
+            <div class="cat-desc">ปฐมกาล โนอาห์ โมเสส บัญญัติ 10 ประการ</div>
+          </div>
+
+          <!-- New Testament -->
+          <div class="category-btn" onclick="startQuiz('NEW_TESTAMENT')">
+            <div class="cat-icon">✝️</div>
+            <div class="cat-title">พันธสัญญาใหม่</div>
+            <div class="cat-desc">พระเยซู อัครทูต การอัศจรรย์ คืนพระชนม์</div>
+          </div>
+
+          <!-- People -->
+          <div class="category-btn" onclick="startQuiz('PEOPLE')">
+            <div class="cat-icon">👥</div>
+            <div class="cat-title">บุคคลสำคัญ</div>
+            <div class="cat-desc">ดาวิด โยเซฟ ซัมสัน เอสเธอร์ เปาโล</div>
+          </div>
+
+          <!-- Verses & Trivia -->
+          <div class="category-btn" onclick="startQuiz('VERSES_TRIVIA')">
+            <div class="cat-icon">📖</div>
+            <div class="cat-title">ข้อจำ & เกร็ดน่ารู้</div>
+            <div class="cat-desc">ข้อท่องจำยอดนิยมและโครงสร้างพระคัมภีร์</div>
+          </div>
+        </div>
+
+        <!-- YouTube Creator Promo -->
+        <div class="yt-card">
+          <div class="yt-avatar">▶️</div>
+          <div>
+            <div style="font-weight:800; font-size:1.15rem; color:#dc2626;">YouTube: jewcha</div>
+            <div style="font-size:0.85rem; color:var(--text-muted); margin-top:2px;">@jewcha • สื่อคริสเตียนและพระวจนะ</div>
+          </div>
+          <p style="font-size:0.85rem; line-height:1.5; color:var(--text);">ร่วมสนับสนุนและเป็นกำลังใจในการพัฒนาแอพเพื่อพระวจนะ ด้วยการกดติดตาม (Subscribe) ช่อง jewcha ครับ ❤️</p>
+          <a href="https://www.youtube.com/@jewcha" target="_blank" rel="noopener noreferrer" class="yt-btn">
+            <span>🔴</span> กดติดตามช่อง jewcha
+          </a>
+        </div>
+      </section>
+
+      <!-- ================= 2. QUIZ SCREEN ================= -->
+      <section id="screen-quiz" class="screen">
+        <div class="quiz-header">
+          <button class="icon-btn" onclick="confirmExitQuiz()">✕</button>
+          <div class="progress-bar-container">
+            <div class="progress-bar" id="quiz-progress-bar"></div>
+          </div>
+          <div class="timer-badge" id="quiz-timer-badge">⏱️ <span id="timer-val">15</span>s</div>
+        </div>
+
+        <div class="question-card">
+          <div class="q-meta">
+            <span id="quiz-cat-label">หมวดหมู่</span>
+            <span id="quiz-counter">ข้อที่ 1/10</span>
+          </div>
+          <div class="q-text" id="quiz-question-text">คำถามกำลังโหลด...</div>
+        </div>
+
+        <div class="options-list" id="quiz-options-list">
+          <!-- Rendered dynamically -->
+        </div>
+
+        <!-- Explanation card shown after answering -->
+        <div class="explanation-card" id="quiz-explanation-box">
+          <div class="exp-title">
+            <span id="exp-status-icon">💡</span>
+            <span id="exp-status-text">คำอธิบาย</span>
+          </div>
+          <div class="exp-body" id="exp-body-text">คำอธิบายเฉลย</div>
+          <div class="exp-ref" id="exp-ref-text">อ้างอิง: ปฐมกาล 1:1 (THSV11)</div>
+        </div>
+
+        <button class="action-btn" id="next-q-btn" style="display:none;" onclick="nextQuestion()">
+          <span>ถัดไป</span> ➔
+        </button>
+      </section>
+
+      <!-- ================= 3. RESULT SCREEN ================= -->
+      <section id="screen-result" class="screen">
+        <div class="card result-card">
+          <div class="score-circle">
+            <div class="score-number" id="res-score">8</div>
+            <div class="score-total">เต็ม 10 คะแนน</div>
+          </div>
+
+          <div>
+            <h2 id="res-title" style="font-size:1.4rem; font-weight:800;">ยอดเยี่ยมมาก! 🎉</h2>
+            <p id="res-msg" style="font-size:0.88rem; color:var(--text-muted); margin-top:4px;">คุณมีความรอบรู้พระคัมภีร์ที่ยอดเยี่ยม ขอพระเจ้าอวยพรครับ</p>
+          </div>
+
+          <div class="stats-row">
+            <div class="stat-box">
+              <div class="stat-val" id="res-correct" style="color:var(--success);">8</div>
+              <div class="stat-lbl">ตอบถูก</div>
+            </div>
+            <div class="stat-box">
+              <div class="stat-val" id="res-wrong" style="color:var(--danger);">2</div>
+              <div class="stat-lbl">ตอบผิด</div>
+            </div>
+            <div class="stat-box">
+              <div class="stat-val" id="res-time">45s</div>
+              <div class="stat-lbl">เวลาที่ใช้</div>
+            </div>
+          </div>
+
+          <div style="display:flex; flex-direction:column; gap:10px; width:100%; margin-top:8px;">
+            <button class="action-btn" onclick="showReviewModal()">
+              <span>📝 ดูเฉลยละเอียดทุกข้อ</span>
+            </button>
+            <button class="action-btn" style="background:var(--accent);" onclick="startQuiz(currentCategory)">
+              <span>🔄 เล่นใหม่อีกครั้ง</span>
+            </button>
+            <button class="option-btn" style="justify-content:center;" onclick="shareResult()">
+              <span>📤 แชร์คะแนนให้เพื่อน</span>
+            </button>
+            <button class="option-btn" style="justify-content:center;" onclick="navigate('home')">
+              <span>🏠 กลับหน้าหลัก</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Creator Support Card on Result -->
+        <div class="yt-card">
+          <div style="font-weight:700; font-size:0.95rem;">ชื่นชอบแบบทดสอบนี้ไหมครับ?</div>
+          <p style="font-size:0.82rem; color:var(--text-muted);">ช่วยกดติดตามช่อง YouTube <b>jewcha</b> เพื่อเป็นกำลังใจให้ผู้จัดทำด้วยนะครับ</p>
+          <a href="https://www.youtube.com/@jewcha" target="_blank" rel="noopener noreferrer" class="yt-btn" style="font-size:0.85rem; padding:10px 20px;">
+            <span>▶️</span> ติดตามช่อง jewcha
+          </a>
+        </div>
+      </section>
+
+      <!-- ================= 4. SUPPORT SCREEN ================= -->
+      <section id="screen-support" class="screen">
+        <div class="yt-card" style="padding:28px 20px;">
+          <div class="yt-avatar" style="width:84px; height:84px; font-size:2.4rem;">▶️</div>
+          <h2 style="font-size:1.4rem; font-weight:800; color:#dc2626;">jewcha</h2>
+          <div style="font-size:0.9rem; color:var(--text-muted); font-weight:600;">@jewcha • YouTube Channel</div>
+          <p style="font-size:0.9rem; line-height:1.6; color:var(--text);">
+            ขอเชิญชวนพี่น้องช่วยกันกดติดตาม (Subscribe) ช่อง YouTube <b>jewcha</b> เพื่อร่วมสนับสนุนและเป็นกำลังใจให้ผู้สร้างในการผลิตสื่อคริสเตียน คอนเทนต์สร้างสรรค์ และพัฒนาแอพพระคัมภีร์ต่อไปครับ ❤️
+          </p>
+          <a href="https://www.youtube.com/@jewcha" target="_blank" rel="noopener noreferrer" class="yt-btn" style="width:100%; justify-content:center;">
+            <span>🔴</span> กดติดตามช่อง YouTube jewcha
+          </a>
+          <button class="option-btn" style="justify-content:center;" onclick="copyChannelLink()">
+            <span>📋 คัดลอกลิงก์ช่อง jewcha</span>
+          </button>
+        </div>
+
+        <div class="card">
+          <div class="section-title" style="margin-bottom:12px;">
+            <span>📖 ลิขสิทธิ์พระคัมภีร์</span>
+          </div>
+          <p style="font-size:0.85rem; line-height:1.6; color:var(--text-muted);">
+            คำถาม ข้ออ้างอิง และเนื้อหาทั้งหมดอ้างอิงตาม <b>พระคริสตธรรมคัมภีร์ ฉบับมาตรฐาน 2011 (THSV11)</b> ลิขสิทธิ์โดยสมาคมพระคริสตธรรมไทย (Thailand Bible Society - TBS) จัดทำขึ้นเพื่อการศึกษาและการเรียนรู้พระวจนะ
+          </p>
+        </div>
+      </section>
+    </main>
+
+    <!-- Bottom Navigation -->
+    <nav class="bottom-nav">
+      <button class="nav-item active" id="nav-home" onclick="navigate('home')">
+        <span class="nav-icon">🏠</span>
+        <span>หน้าแรก</span>
+      </button>
+      <button class="nav-item" id="nav-quiz" onclick="startQuiz('ALL')">
+        <span class="nav-icon">🎯</span>
+        <span>เล่นควิซ</span>
+      </button>
+      <button class="nav-item" id="nav-support" onclick="navigate('support')">
+        <span class="nav-icon">❤️</span>
+        <span>สนับสนุน</span>
+      </button>
+    </nav>
+
+    <!-- Review Modal -->
+    <div class="modal-overlay" id="review-modal" onclick="closeReviewModal(event)">
+      <div class="modal-content" onclick="event.stopPropagation()">
+        <div style="display:flex; justify-content:space-between; align-items:center;">
+          <h3 style="font-size:1.15rem; font-weight:800;">📝 เฉลยคำตอบละเอียด</h3>
+          <button class="icon-btn" onclick="closeReviewModal()">✕</button>
+        </div>
+        <div id="review-list" style="display:flex; flex-direction:column; gap:12px; margin-top:6px;">
+          <!-- Injected via JS -->
+        </div>
+      </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast">ข้อความแจ้งเตือน</div>
+  </div>
+
+  <script>
+    // ================= QUESTION BANK (THSV11) =================
+    const QUESTIONS = [
+      // Old Testament
+      {
+        id: 1,
+        cat: 'OLD_TESTAMENT',
+        q: 'พระเจ้าทรงสร้างฟ้าสวรรค์และแผ่นดินโลก และทรงหยุดพักจากการงานในวันที่เท่าใด?',
+        opts: ['วันที่ 5', 'วันที่ 6', 'วันที่ 7', 'วันที่ 8'],
+        ans: 2,
+        exp: 'พระเจ้าทรงสร้างทุกสิ่งเสร็จสิ้นใน 6 วัน และในวันที่เจ็ดพระองค์ทรงหยุดพักจากการงานทั้งสิ้นที่ทรงกระทำ',
+        ref: 'ปฐมกาล 2:2-3 (THSV11)'
+      },
+      {
+        id: 2,
+        cat: 'OLD_TESTAMENT',
+        q: 'ใครเป็นผู้ต่อเรือขนาดใหญ่ด้วยไม้สนโกเฟอร์ เพื่อรอดพ้นจากน้ำท่วมโลกตามพระบัญชาของพระเจ้า?',
+        opts: ['อับราฮัม', 'โนอาห์', 'โมเสส', 'โยบ'],
+        ans: 1,
+        exp: 'พระเจ้าทรงบัญชาให้โนอาห์ต่อเรือด้วยไม้สนโกเฟอร์เพื่อช่วยชีวิตครอบครัวและสิ่งมีชีวิตทุกชนิดให้อยู่รอด',
+        ref: 'ปฐมกาล 6:13-14 (THSV11)'
+      },
+      {
+        id: 3,
+        cat: 'OLD_TESTAMENT',
+        q: 'ทะเลใดที่พระเจ้าทรงแยกออกเพื่อให้โมเสสพาคนอิสราเอลข้ามหนีกองทัพอียิปต์บนดินแห้ง?',
+        opts: ['ทะเลแดง', 'ทะเลตาย', 'ทะเลกาลิลี', 'ทะเลเมดิเตอร์เรเนียน'],
+        ans: 0,
+        exp: 'โมเสสยื่นมือออกเหนือทะเล และพระยาห์เวห์ทรงบันดาลให้ลมทิศตะวันออกพัดตลอดคืนจนน้ำแยกออก คนอิสราเอลจึงเดินข้ามทะเลบนดินแห้ง',
+        ref: 'อพยพ 14:21-22 (THSV11)'
+      },
+      {
+        id: 4,
+        cat: 'OLD_TESTAMENT',
+        q: 'พระบัญญัติสิบประการประทานแก่โมเสส ณ ภูเขาใด?',
+        opts: ['ภูเขาคาร์เมล', 'ภูเขาซีนาย (โฮเรบ)', 'ภูเขาเนโบ', 'ภูเขาไซออน'],
+        ans: 1,
+        exp: 'พระยาห์เวห์เสด็จลงมาบนยอดภูเขาซีนาย ทรงเรียกโมเสสขึ้นไปและประทานพระโอวาทบนแผ่นศิลาสองแผ่น',
+        ref: 'อพยพ 19:20; 20:1-17 (THSV11)'
+      },
+      {
+        id: 5,
+        cat: 'OLD_TESTAMENT',
+        q: 'ใครถูกโยนลงไปในถ้ำสิงโตเพราะอธิษฐานต่อพระเจ้า แต่องค์พระผู้เป็นเจ้าทรงส่งทูตสวรรค์มาปิดปากสิงโตไว้?',
+        opts: ['ดาเนียล', 'เยเรมีย์', 'เอเสเคียล', 'อิสยาห์'],
+        ans: 0,
+        exp: 'ดาเนียลคุกเข่าลงอธิษฐานและสรรเสริญพระเจ้าวันละสามครั้ง จึงถูกใส่ร้ายและโยนลงถ้ำสิงโต แต่พระเจ้าทรงปกปักรักษาเขา',
+        ref: 'ดาเนียล 6:10, 21-22 (THSV11)'
+      },
+      {
+        id: 6,
+        cat: 'OLD_TESTAMENT',
+        q: 'ผู้เผยพระวจนะท่านใดถูกปลาตัวมหึมากลืนเข้าไปในท้องเป็นเวลา 3 วัน 3 คืนหลังพยายามหนีไปทารชิช?',
+        opts: ['เอลียาห์', 'โยนาห์', 'อาโมส', 'มีคาห์'],
+        ans: 1,
+        exp: 'โยนาห์หนีการทรงเรียกของพระยาห์เวห์ที่จะให้ไปเตือนชาวนีนะเวห์ จึงถูกปลากลืนและสำรอกออกมาบนแผ่นดินแห้งเมื่อเขากลับใจ',
+        ref: 'โยนาห์ 1:17; 2:10 (THSV11)'
+      },
+      {
+        id: 7,
+        cat: 'OLD_TESTAMENT',
+        q: 'อาหารอัศจรรย์ที่พระเจ้าประทานจากฟ้าสวรรค์ให้คนอิสราเอลกินในถิ่นทุรกันดารตลอด 40 ปีเรียกว่าอะไร?',
+        opts: ['มานา', 'มะเดื่อ', 'ขนมปังไร้เชื้อ', 'ผลทับทิม'],
+        ans: 0,
+        exp: 'มานามีลักษณะเป็นเกล็ดบางเหมือนน้ำค้างแข็ง เมล็ดเหมือนเมล็ดผักชีสีขาว รสเหมือนขนมแผ่นผสมน้ำผึ้ง',
+        ref: 'อพยพ 16:14-15; 31 (THSV11)'
+      },
+      {
+        id: 8,
+        cat: 'OLD_TESTAMENT',
+        q: 'กษัตริย์องค์ใดทูลขอสติปัญญาจากพระเจ้าในการพิพากษาปกครอง และได้ทรงสร้างพระวิหารแห่งแรกในเยรูซาเล็ม?',
+        opts: ['ซาอูล', 'ดาวิด', 'ซาโลมอน', 'เฮเซคียาห์'],
+        ans: 2,
+        exp: 'ซาโลมอนทูลขอใจที่เข้าใจเพื่อจะวินิจฉัยประชากรของพระเจ้า และทรงสร้างพระนิเวศของพระยาห์เวห์อย่างสง่างาม',
+        ref: '1 พงศ์กษัตริย์ 3:9-12; 6:1 (THSV11)'
+      },
+
+      // New Testament
+      {
+        id: 9,
+        cat: 'NEW_TESTAMENT',
+        q: 'พระเยซูคริสต์ทรงประสูติ ณ เมืองใดตามคำพยากรณ์โบราณ?',
+        opts: ['นาซาเร็ธ', 'เบธเลเฮม', 'เยรูซาเล็ม', 'คาเปอรนาอุม'],
+        ans: 1,
+        exp: 'พระเยซูทรงประสูติในรางหญ้า ณ เมืองเบธเลเฮมในแคว้นยูเดีย สมจริงตามคำเผยของมีคาห์',
+        ref: 'ลูกา 2:4-7; มีคาห์ 5:2 (THSV11)'
+      },
+      {
+        id: 10,
+        cat: 'NEW_TESTAMENT',
+        q: 'การอัศจรรย์หมายสำคัญแรกที่พระเยซูทรงกระทำตามบันทึกในพระธรรมยอห์นคืออะไร?',
+        opts: ['เดินบนน้ำ', 'เปลี่ยนน้ำเป็นเหล้าองุ่น', 'รักษาคนตาบอด', 'ชุบชีวิตลาซารัส'],
+        ans: 1,
+        exp: 'พระเยซูทรงเปลี่ยนน้ำให้เป็นเหล้าองุ่นในงานสมรส ณ หมู่บ้านคานา แคว้นกาลิลี และสำแดงพระสิริของพระองค์',
+        ref: 'ยอห์น 2:1-11 (THSV11)'
+      },
+      {
+        id: 11,
+        cat: 'NEW_TESTAMENT',
+        q: 'พระเยซูทรงเลี้ยงคนประมาณ 5,000 คนด้วยขนมปังและปลากี่ตัว?',
+        opts: ['ขนมปัง 5 ก้อน ปลา 2 ตัว', 'ขนมปัง 7 ก้อน ปลา 3 ตัว', 'ขนมปัง 2 ก้อน ปลา 5 ตัว', 'ขนมปัง 12 ก้อน ปลา 1 ตัว'],
+        ans: 0,
+        exp: 'จากอาหารกลางวันที่มีขนมปังข้าวบาร์เลย์ห้าก้อนกับปลาสองตัว พระเยซูทรงขอบพระคุณพระเจ้าและแจกจ่าย และเก็บเศษที่เหลือได้ 12 ตะกร้า',
+        ref: 'มัทธิว 14:17-21; ยอห์น 6:9-13 (THSV11)'
+      },
+      {
+        id: 12,
+        cat: 'NEW_TESTAMENT',
+        q: 'อัครทูตท่านใดกล่าวปฏิเสธว่าไม่รู้จักพระเยซู 3 ครั้งก่อนไก่ขัน?',
+        opts: ['ยูดาส อิสคาริโอท', 'เปโตร', 'ยอห์น', 'โธมัส'],
+        ans: 1,
+        exp: 'เปโตรปฏิเสธพระองค์ 3 ครั้ง และเมื่อไก่ขันเขาก็ระลึกถึงพระดำรัสของพระเยซู จึงออกไปร้องไห้อย่างขมขื่น',
+        ref: 'มัทธิว 26:69-75 (THSV11)'
+      },
+      {
+        id: 13,
+        cat: 'NEW_TESTAMENT',
+        q: 'พระเยซูทรงฟื้นคืนพระชนม์ขึ้นมาจากความตายในวันที่เท่าใดตามพระคัมภีร์?',
+        opts: ['วันที่ 2', 'วันที่ 3', 'วันที่ 7', 'วันที่ 40'],
+        ans: 1,
+        exp: 'พระเยซูทรงคืนพระชนม์ในวันที่สาม มีชัยชนะเหนือความตายและหลุมฝังศพเพื่อประทานชีวิตนิรันดร์แก่ผู้เชื่อ',
+        ref: '1 โครินธ์ 15:4; มัทธิว 28:1-6 (THSV11)'
+      },
+      {
+        id: 14,
+        cat: 'NEW_TESTAMENT',
+        q: 'พระวิญญาณบริสุทธิ์เสด็จลงมาสถิตเหนือบรรดาผู้เชื่อในวันสำคัญใด?',
+        opts: ['วันเพนเทคอสต์', 'วันปัสกา', 'วันลบมลทิน', 'วันอยู่เพิง'],
+        ans: 0,
+        exp: 'ในวันเพนเทคอสต์ เกิดเสียงกระหน่ำเหมือนลมกล้า และเห็นเปลวไฟรูปร่างเหมือนลิ้นแยกกระจายมาอยู่เหนือพวกเขาทุกคน',
+        ref: 'กิจการ 2:1-4 (THSV11)'
+      },
+      {
+        id: 15,
+        cat: 'NEW_TESTAMENT',
+        q: 'คำอุปมาใดที่พระเยซูทรงสอนถึงคนต่างชาติผู้มีความเมตตาต่อผู้ที่ถูกผู้ร้ายทำร้ายบาดเจ็บข้างทาง?',
+        opts: ['ผู้หว่านพืช', 'บุตรน้อยหลงหาย', 'ชาวสะมาเรียใจดี', 'คนต้นเรือนสัตย์ซื่อ'],
+        ans: 2,
+        exp: 'ชาวสะมาเรียผู้ซึ่งคนยิวรังเกียจ กลับเป็นคนที่มีความเมตตาพันแผลและส่งคนเจ็บไปรักษาที่โรงแรม',
+        ref: 'ลูกา 10:25-37 (THSV11)'
+      },
+      {
+        id: 16,
+        cat: 'NEW_TESTAMENT',
+        q: 'พระธรรมเล่มสุดท้ายในพระคัมภีร์พันธสัญญาใหม่คือเล่มใด?',
+        opts: ['ยูดา', 'วิวรณ์', 'ฮีบรู', 'กิจการ'],
+        ans: 1,
+        exp: 'พระธรรมวิวรณ์เขียนโดยอัครทูตยอห์นขณะถูกเนรเทศอยู่ที่เกาะปัทมอส เป็นการเปิดเผยถึงชัยชนะของพระเมษโปดกและฟ้าสวรรค์ใหม่และแผ่นดินโลกใหม่',
+        ref: 'วิวรณ์ 1:1-2; 21:1 (THSV11)'
+      },
+
+      // People
+      {
+        id: 17,
+        cat: 'PEOPLE',
+        q: 'ใครได้รับการขนานนามว่าเป็น "บิดาของบรรดาผู้เชื่อ" และพระเจ้าทรงสัญญาว่าเชื้อสายของเขาจะมากมายดังดวงดาวในท้องฟ้า?',
+        opts: ['โนอาห์', 'อับราฮัม', 'ยาโคบ', 'อิสอัค'],
+        ans: 1,
+        exp: 'อับราฮัมเชื่อฟังการทรงเรียกของพระยาห์เวห์ ออกเดินทางโดยไม่รู้ว่าจะไปที่ไหน และเชื่อในพระสัญญาจึงนับว่าเป็นความชอบธรรม',
+        ref: 'ปฐมกาล 15:5-6; โรม 4:11 (THSV11)'
+      },
+      {
+        id: 18,
+        cat: 'PEOPLE',
+        q: 'เด็กหนุ่มผู้เลี้ยงแกะที่เอาชนะยักษ์โกลิอัทด้วยสลิงกับหินเกลี้ยงหนึ่งก้อนคือใคร?',
+        opts: ['โยนาธาน', 'ซัมสัน', 'ดาวิด', 'กิเดโอน'],
+        ans: 2,
+        exp: 'ดาวิดเข้าสู้กับโกลิอัทในพระนามของพระยาห์เวห์จอมทัพ และใช้หินเกลี้ยงจากลำธารสลัดใส่หน้าผากของโกลิอัทจนล้มลง',
+        ref: '1 ซามูเอล 17:45-50 (THSV11)'
+      },
+      {
+        id: 19,
+        cat: 'PEOPLE',
+        q: 'หญิงสาวชาวโมอับผู้กล่าวแก่แม่สามีว่า "พระเจ้าของแม่จะเป็นพระเจ้าของฉัน" และกลายเป็นบรรพบุรุษของกษัตริย์ดาวิดคือใคร?',
+        opts: ['เอสเธอร์', 'รูธ', 'ราเชล', 'เลอาห์'],
+        ans: 1,
+        exp: 'รูธแสดงความรักและความสัตย์ซื่อต่อนาโอมี และต่อมาได้แต่งงานกับโบอาสในเบธเลเฮม',
+        ref: 'รูธ 1:16; 4:18-22 (THSV11)'
+      },
+      {
+        id: 20,
+        cat: 'PEOPLE',
+        q: 'หญิงชาวยิวผู้ได้เป็นราชินีแห่งเปอร์เซียและเสี่ยงชีวิตเข้าเฝ้ากษัตริย์เพื่อช่วยชนชาติยิวให้รอดพ้นคือใคร?',
+        opts: ['เดโบราห์', 'มิเรียม', 'เอสเธอร์', 'ฮันนาห์'],
+        ans: 2,
+        exp: 'พระนางเอสเธอร์กล่าวว่า "ถ้าข้าพเจ้าต้องพินาศ ข้าพเจ้าก็ยอมพินาศ" และปกป้องประชากรยิวจากแผนการชั่วร้ายของฮามาน',
+        ref: 'เอสเธอร์ 4:14-16 (THSV11)'
+      },
+      {
+        id: 21,
+        cat: 'PEOPLE',
+        q: 'ใครเคยข่มเหงคริสตจักร แต่ได้พบพระเยซูระหว่างทางไปเมืองดามัสกัส และกลับใจกลายเป็นอัครทูตผู้ยิ่งใหญ่?',
+        opts: ['บารนาบัส', 'เปาโล (เซาโล)', 'สิลาส', 'ทิโมธี'],
+        ans: 1,
+        exp: 'เซาโลผู้มีใจดุร้ายต่อผู้เชื่อ ได้เห็นแสงสว่างจ้าจากฟ้าสวรรค์และกลับใจกลายเป็นอัครทูตเปาโลผู้นำข่าวประเสริฐไปถึงคนต่างชาติ',
+        ref: 'กิจการ 9:3-6 (THSV11)'
+      },
+      {
+        id: 22,
+        cat: 'PEOPLE',
+        q: 'ชายผู้มีพละกำลังมหาศาลซึ่งพลังของเขาผูกพันกับคำปฏิญาณนาศีร์และผมที่ไม่ได้ตัดคือใคร?',
+        opts: ['เยฟธาห์', 'ซัมสัน', 'กิเดโอน', 'บาราค'],
+        ans: 1,
+        exp: 'ซัมสันเป็นผู้วินิจฉัยของอิสราเอล พระวิญญาณของพระเจ้าสถิตกับเขาเมื่อรักษาคำปฏิญาณการเป็นนาศีร์',
+        ref: 'ผู้วินิจฉัย 16:17 (THSV11)'
+      },
+      {
+        id: 23,
+        cat: 'PEOPLE',
+        q: 'ผู้ที่ถูกพี่ชายขายไปเป็นทาสในอียิปต์เพราะความอิจฉา แต่ต่อมาพระเจ้าทรงยกชูให้เป็นผู้ว่าการทั่วแผ่นดินอียิปต์คือใคร?',
+        opts: ['เบนยามิน', 'โยเซฟ', 'รูเบน', 'ยูดาห์'],
+        ans: 1,
+        exp: 'โยเซฟกล่าวแก่พี่ชายว่า "พวกพี่คิดร้ายต่อฉันก็จริง แต่ฝ่ายพระเจ้าทรงดำริให้เกิดผลดี เพื่อช่วยชีวิตคนเป็นอันมาก"',
+        ref: 'ปฐมกาล 37:28; 50:20 (THSV11)'
+      },
+
+      // Verses & Trivia
+      {
+        id: 24,
+        cat: 'VERSES_TRIVIA',
+        q: 'พระคริสตธรรมคัมภีร์ฉบับมาตรฐาน (THSV11) ประกอบด้วยพระธรรมทั้งหมดกี่เล่ม?',
+        opts: ['66 เล่ม (39 + 27)', '70 เล่ม (40 + 30)', '60 เล่ม (35 + 25)', '72 เล่ม (45 + 27)'],
+        ans: 0,
+        exp: 'พระคัมภีร์โปรเตสแตนต์มี 66 เล่ม แบ่งเป็นพันธสัญญาเดิม 39 เล่ม และพันธสัญญาใหม่ 27 เล่ม',
+        ref: 'โครงสร้างพระคัมภีร์ (THSV11)'
+      },
+      {
+        id: 25,
+        cat: 'VERSES_TRIVIA',
+        q: 'พระธรรมบทใดในพระคัมภีร์ที่มีความยาวมากที่สุด (176 ข้อ)?',
+        opts: ['สดุดี 23', 'สดุดี 119', 'อิสยาห์ 53', 'มัทธิว 5'],
+        ans: 1,
+        exp: 'สดุดี 119 มีความยาว 176 ข้อ แต่ละวรรคสะท้อนถึงความรักและความล้ำค่าของพระวจนะและพระบัญชาของพระยาห์เวห์',
+        ref: 'สดุดี 119 (THSV11)'
+      },
+      {
+        id: 26,
+        cat: 'VERSES_TRIVIA',
+        q: 'ประโยคแรกสุดในพระคริสตธรรมคัมภีร์ (ปฐมกาล 1:1) ตามฉบับมาตรฐาน THSV11 เริ่มต้นว่าอย่างไร?',
+        opts: [
+          'ในปฐมกาล พระเจ้าทรงเนรมิตสร้างฟ้าและแผ่นดิน',
+          'ในปฐมกาลพระเจ้าทรงสร้างฟ้าและแผ่นดิน',
+          'พระเจ้าตรัสว่าจงเกิดความสว่าง',
+          'ในปฐมกาลมีพระวาทะ'
+        ],
+        ans: 0,
+        exp: 'ปฐมกาล 1:1 ในฉบับมาตรฐาน THSV11 บันทึกว่า "ในปฐมกาล พระเจ้าทรงเนรมิตสร้างฟ้าและแผ่นดิน"',
+        ref: 'ปฐมกาล 1:1 (THSV11)'
+      },
+      {
+        id: 27,
+        cat: 'VERSES_TRIVIA',
+        q: 'ข้อความที่ว่า "จงขอแล้วจะได้ จงหาแล้วจะพบ จงเคาะแล้วจะเปิดให้แก่ท่าน" บันทึกอยู่ในพระธรรมใด?',
+        opts: ['มัทธิว 7:7', 'มาระโก 1:1', 'โรม 8:28', 'ยอห์น 14:6'],
+        ans: 0,
+        exp: 'อยู่ในคำเทศนาบนภูเขาของพระเยซูคริสต์ หนุนใจให้ผู้เชื่อทูลขอสิ่งดีจากพระบิดาแห่งฟ้าสวรรค์ด้วยความเชื่อ',
+        ref: 'มัทธิว 7:7 (THSV11)'
+      },
+      {
+        id: 28,
+        cat: 'VERSES_TRIVIA',
+        q: 'ตาม 1 โครินธ์ 13 สิ่งใดที่คงอยู่ 3 สิ่ง และสิ่งใดที่ยิ่งใหญ่ที่สุด?',
+        opts: [
+          'ความเชื่อ ความหวังใจ และความรัก (ความรักยิ่งใหญ่ที่สุด)',
+          'สติปัญญา ความรู้ และกำลัง (สติปัญญายิ่งใหญ่ที่สุด)',
+          'ความรอด สันติสุข และการอัศจรรย์ (ความรอดยิ่งใหญ่ที่สุด)',
+          'ความเชื่อ ความสัตย์ซื่อ และความถ่อมใจ (ความเชื่อยิ่งใหญ่ที่สุด)'
+        ],
+        ans: 0,
+        exp: '1 โครินธ์ 13:13 ระบุว่า "และบัดนี้ ทั้งสามสิ่งนี้ยังคงอยู่ คือความเชื่อ ความหวังใจ และความรัก แต่ความรักนั้นใหญ่ที่สุด"',
+        ref: '1 โครินธ์ 13:13 (THSV11)'
+      },
+      {
+        id: 29,
+        cat: 'VERSES_TRIVIA',
+        q: 'พระเยซูตรัสกับโธมัสว่า "เราเป็นทางนั้น เป็นความจริง และเป็น..." สิ่งใด?',
+        opts: ['ความหวัง', 'ชีวิต', 'สันติสุข', 'ความรอด'],
+        ans: 1,
+        exp: 'ยอห์น 14:6 บันทึกว่า "พระเยซูตรัสกับเขาว่า เราเป็นทางนั้น เป็นความจริง และเป็นชีวิต ไม่มีใครมาถึงพระบิดาได้นอกจากจะมาทางเรา"',
+        ref: 'ยอห์น 14:6 (THSV11)'
+      },
+      {
+        id: 30,
+        cat: 'VERSES_TRIVIA',
+        q: 'เมืองใดที่กำแพงพังทลายลงมาหลังจากกองทัพอิสราเอลเดินวนรอบเมือง 7 วันและเป่าเขาสัตว์?',
+        opts: ['เยริโค', 'บาบิโลน', 'ดามัสกัส', 'เยรูซาเล็ม'],
+        ans: 0,
+        exp: 'โยชูวาและคนอิสราเอลเชื่อฟังพระเจ้า เดินวนรอบเมืองเยริโค เมื่อปุโรหิตเป่าเขาสัตว์และทุกคนโห่ร้องกำแพงก็พังทลายลงทันที',
+        ref: 'โยชูวา 6:20 (THSV11)'
+      }
+    ];
+
+    const DAILY_VERSES = [
+      { text: "เพราะว่าพระเจ้าทรงรักโลก จนได้ทรงประทานพระบุตรองค์เดียวของพระองค์ เพื่อทุกคนที่วางใจในพระบุตรนั้นจะไม่พินาศ แต่มีชีวิตนิรันดร์", ref: "ยอห์น 3:16 (THSV11)" },
+      { text: "พระยาห์เวห์ทรงเป็นผู้เลี้ยงดูข้าพเจ้า ข้าพเจ้าจะไม่ขัดสน", ref: "สดุดี 23:1 (THSV11)" },
+      { text: "ข้าพเจ้าผจญทุกสิ่งได้ โดยพระองค์ผู้ทรงเสริมกำลังข้าพเจ้า", ref: "ฟิลิปปี 4:13 (THSV11)" },
+      { text: "จงวางใจในพระยาห์เวห์ด้วยสุดใจของเจ้า และอย่าพึ่งพาความรอบรู้ของตนเอง", ref: "สุภาษิต 3:5 (THSV11)" },
+      { text: "พระวจนะของพระองค์เป็นโคมสำหรับเท้าของข้าพระองค์ และเป็นความสว่างแก่มรรคาของข้าพระองค์", ref: "สดุดี 119:105 (THSV11)" },
+      { text: "แต่ผลของพระวิญญาณนั้นคือ ความรัก ความยินดี สันติสุข ความอดทน ความกรุณา ความดี ความสัตย์ซื่อ ความสุภาพอ่อนโยน การรู้จักบังคับตน", ref: "กาลาเทีย 5:22-23 (THSV11)" }
+    ];
+
+    // ================= STATE =================
+    let currentCategory = 'ALL';
+    let currentQuestions = [];
+    let currentQIndex = 0;
+    let userAnswers = []; // { q, selected, isCorrect, time }
+    let timerInterval = null;
+    let timeLeft = 15;
+    let isTimed = false;
+    let quizStartTime = 0;
+    let currentQStartTime = 0;
+
+    // Web Audio Sound Synth
+    const audioCtx = window.AudioContext || window.webkitAudioContext ? new (window.AudioContext || window.webkitAudioContext)() : null;
+    function playSound(type) {
+      if (!audioCtx) return;
+      if (audioCtx.state === 'suspended') audioCtx.resume();
+      try {
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        const now = audioCtx.currentTime;
+
+        if (type === 'correct') {
+          osc.type = 'triangle';
+          osc.frequency.setValueAtTime(523.25, now); // C5
+          osc.frequency.setValueAtTime(659.25, now + 0.1); // E5
+          osc.frequency.setValueAtTime(783.99, now + 0.2); // G5
+          gain.gain.setValueAtTime(0.2, now);
+          gain.gain.exponentialRampToValueAtTime(0.01, now + 0.35);
+          osc.start(now);
+          osc.stop(now + 0.35);
+        } else if (type === 'wrong') {
+          osc.type = 'sawtooth';
+          osc.frequency.setValueAtTime(220, now); // A3
+          osc.frequency.setValueAtTime(180, now + 0.15);
+          gain.gain.setValueAtTime(0.2, now);
+          gain.gain.exponentialRampToValueAtTime(0.01, now + 0.3);
+          osc.start(now);
+          osc.stop(now + 0.3);
+        } else if (type === 'complete') {
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(440, now);
+          osc.frequency.setValueAtTime(554.37, now + 0.12);
+          osc.frequency.setValueAtTime(659.25, now + 0.24);
+          osc.frequency.setValueAtTime(880, now + 0.36);
+          gain.gain.setValueAtTime(0.25, now);
+          gain.gain.exponentialRampToValueAtTime(0.01, now + 0.6);
+          osc.start(now);
+          osc.stop(now + 0.6);
+        }
+      } catch (e) {
+        console.warn(e);
+      }
+    }
+
+    // Navigation
+    function navigate(screenName) {
+      document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+      document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+
+      const target = document.getElementById(`screen-${screenName}`);
+      if (target) target.classList.add('active');
+
+      const navBtn = document.getElementById(`nav-${screenName}`);
+      if (navBtn) navBtn.classList.add('active');
+
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // Daily Verse
+    function refreshVerse() {
+      const random = DAILY_VERSES[Math.floor(Math.random() * DAILY_VERSES.length)];
+      document.getElementById('verse-text').textContent = `"${random.text}"`;
+      document.getElementById('verse-ref').textContent = random.ref;
+    }
+
+    // Start Quiz
+    function startQuiz(catKey) {
+      currentCategory = catKey;
+      isTimed = (catKey === 'TIMED_CHALLENGE');
+
+      let pool = QUESTIONS;
+      if (catKey === 'OLD_TESTAMENT') pool = QUESTIONS.filter(q => q.cat === 'OLD_TESTAMENT');
+      else if (catKey === 'NEW_TESTAMENT') pool = QUESTIONS.filter(q => q.cat === 'NEW_TESTAMENT');
+      else if (catKey === 'PEOPLE') pool = QUESTIONS.filter(q => q.cat === 'PEOPLE');
+      else if (catKey === 'VERSES_TRIVIA') pool = QUESTIONS.filter(q => q.cat === 'VERSES_TRIVIA');
+
+      // Shuffle & take 10
+      currentQuestions = [...pool].sort(() => 0.5 - Math.random()).slice(0, 10);
+      currentQIndex = 0;
+      userAnswers = [];
+      quizStartTime = Date.now();
+
+      document.getElementById('quiz-timer-badge').style.display = isTimed ? 'flex' : 'none';
+
+      navigate('quiz');
+      renderQuestion();
+    }
+
+    function renderQuestion() {
+      if (currentQIndex >= currentQuestions.length) {
+        finishQuiz();
+        return;
+      }
+
+      const q = currentQuestions[currentQIndex];
+      const total = currentQuestions.length;
+
+      // Progress bar
+      const progressPercent = ((currentQIndex) / total) * 100;
+      document.getElementById('quiz-progress-bar').style.width = `${progressPercent}%`;
+
+      document.getElementById('quiz-counter').textContent = `ข้อที่ ${currentQIndex + 1}/${total}`;
+      document.getElementById('quiz-cat-label').textContent = getCatTitle(q.cat);
+      document.getElementById('quiz-question-text').textContent = q.q;
+
+      // Explanation hide
+      const expBox = document.getElementById('quiz-explanation-box');
+      expBox.classList.remove('active');
+      document.getElementById('next-q-btn').style.display = 'none';
+
+      // Options
+      const optionsList = document.getElementById('quiz-options-list');
+      optionsList.innerHTML = '';
+      const letters = ['ก', 'ข', 'ค', 'ง'];
+
+      q.opts.forEach((opt, idx) => {
+        const btn = document.createElement('button');
+        btn.className = 'option-btn';
+        btn.innerHTML = `<span class="opt-badge">${letters[idx] || idx + 1}</span><span>${opt}</span>`;
+        btn.onclick = () => selectAnswer(idx);
+        optionsList.appendChild(btn);
+      });
+
+      // Timer
+      clearInterval(timerInterval);
+      if (isTimed) {
+        timeLeft = 15;
+        const timerBadge = document.getElementById('quiz-timer-badge');
+        const timerVal = document.getElementById('timer-val');
+        timerVal.textContent = timeLeft;
+        timerBadge.classList.remove('urgent');
+
+        timerInterval = setInterval(() => {
+          timeLeft--;
+          timerVal.textContent = timeLeft;
+          if (timeLeft <= 5) timerBadge.classList.add('urgent');
+          if (timeLeft <= 0) {
+            clearInterval(timerInterval);
+            selectAnswer(-1); // time out
+          }
+        }, 1000);
+      }
+
+      currentQStartTime = Date.now();
+    }
+
+    function selectAnswer(selectedIndex) {
+      clearInterval(timerInterval);
+      const q = currentQuestions[currentQIndex];
+      const isCorrect = (selectedIndex === q.ans);
+      const timeSpent = Math.round((Date.now() - currentQStartTime) / 1000);
+
+      userAnswers.push({
+        question: q,
+        selected: selectedIndex,
+        isCorrect: isCorrect,
+        time: timeSpent
+      });
+
+      // Update UI
+      const buttons = document.querySelectorAll('#quiz-options-list .option-btn');
+      buttons.forEach((btn, idx) => {
+        btn.disabled = true;
+        if (idx === q.ans) {
+          btn.classList.add('correct');
+        } else if (idx === selectedIndex) {
+          btn.classList.add('wrong');
+        }
+      });
+
+      // Play Sound
+      playSound(isCorrect ? 'correct' : 'wrong');
+
+      // Show Explanation
+      const expBox = document.getElementById('quiz-explanation-box');
+      const expTitle = document.getElementById('exp-status-text');
+      const expIcon = document.getElementById('exp-status-icon');
+      const expBody = document.getElementById('exp-body-text');
+      const expRef = document.getElementById('exp-ref-text');
+
+      if (isCorrect) {
+        expIcon.textContent = '✅';
+        expTitle.textContent = 'ถูกต้องยอดเยี่ยม!';
+        expTitle.style.color = 'var(--success)';
+      } else {
+        expIcon.textContent = '❌';
+        expTitle.textContent = selectedIndex === -1 ? 'หมดเวลา!' : 'ยังไม่ถูกต้อง';
+        expTitle.style.color = 'var(--danger)';
+      }
+
+      expBody.textContent = q.exp;
+      expRef.textContent = `อ้างอิง: ${q.ref}`;
+      expBox.classList.add('active');
+
+      // Show Next Button
+      const nextBtn = document.getElementById('next-q-btn');
+      nextBtn.style.display = 'flex';
+      nextBtn.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+
+    function nextQuestion() {
+      currentQIndex++;
+      renderQuestion();
+    }
+
+    function confirmExitQuiz() {
+      if (confirm('คุณต้องการออกจากการทำแบบทดสอบหรือไม่? คะแนนในรอบนี้จะไม่ถูกบันทึก')) {
+        clearInterval(timerInterval);
+        navigate('home');
+      }
+    }
+
+    function finishQuiz() {
+      clearInterval(timerInterval);
+      playSound('complete');
+
+      const correctCount = userAnswers.filter(a => a.isCorrect).length;
+      const total = userAnswers.length;
+      const totalTimeSec = Math.round((Date.now() - quizStartTime) / 1000);
+
+      document.getElementById('res-score').textContent = correctCount;
+      document.querySelector('.score-total').textContent = `เต็ม ${total} คะแนน`;
+      document.getElementById('res-correct').textContent = correctCount;
+      document.getElementById('res-wrong').textContent = total - correctCount;
+      document.getElementById('res-time').textContent = `${totalTimeSec}s`;
+
+      const titleEl = document.getElementById('res-title');
+      const msgEl = document.getElementById('res-msg');
+
+      if (correctCount === 10) {
+        titleEl.textContent = 'สมบูรณ์แบบ 10/10! 🏆';
+        msgEl.textContent = 'เก่งมากๆ คุณเป็นผู้เชี่ยวชาญพระคัมภีร์ตัวจริง!';
+      } else if (correctCount >= 8) {
+        titleEl.textContent = 'ยอดเยี่ยมมาก! 🌟';
+        msgEl.textContent = 'คุณมีความเข้าใจพระวจนะของพระเจ้าเป็นอย่างดี';
+      } else if (correctCount >= 5) {
+        titleEl.textContent = 'ทำได้ดีมาก! 👍';
+        msgEl.textContent = 'ฝึกฝนและศึกษาพระวจนะต่อไป พระคัมภีร์ยังมีเรื่องราวที่น่าตื่นเต้นอีกมาก!';
+      } else {
+        titleEl.textContent = 'พยายามต่อไปนะ! ❤️';
+        msgEl.textContent = 'เป็นจุดเริ่มต้นที่ดีในการเรียนรู้และจดจำพระวจนะของพระเจ้า';
+      }
+
+      navigate('result');
+    }
+
+    function showReviewModal() {
+      const list = document.getElementById('review-list');
+      list.innerHTML = '';
+      const letters = ['ก', 'ข', 'ค', 'ง'];
+
+      userAnswers.forEach((item, idx) => {
+        const card = document.createElement('div');
+        card.style.background = 'var(--bg)';
+        card.style.border = `1.5px solid ${item.isCorrect ? 'var(--success)' : 'var(--danger)'}`;
+        card.style.borderRadius = '14px';
+        card.style.padding = '14px';
+
+        const userChoiceText = item.selected === -1 ? 'หมดเวลา (ไม่ได้ตอบ)' : `${letters[item.selected]}. ${item.question.opts[item.selected]}`;
+        const correctChoiceText = `${letters[item.question.ans]}. ${item.question.opts[item.question.ans]}`;
+
+        card.innerHTML = `
+          <div style="font-size:0.8rem; font-weight:700; color:${item.isCorrect ? 'var(--success)' : 'var(--danger)'}; margin-bottom:4px;">
+            ${item.isCorrect ? '✅ ตอบถูก' : '❌ ตอบผิด'} (ข้อที่ ${idx + 1})
+          </div>
+          <div style="font-weight:700; font-size:0.95rem; margin-bottom:8px; line-height:1.4;">${item.question.q}</div>
+          <div style="font-size:0.82rem; margin-bottom:4px;"><b>คำตอบของคุณ:</b> <span style="color:${item.isCorrect ? 'var(--success)' : 'var(--danger)'}">${userChoiceText}</span></div>
+          ${!item.isCorrect ? `<div style="font-size:0.82rem; margin-bottom:6px;"><b>เฉลยที่ถูกต้อง:</b> <span style="color:var(--success); font-weight:bold;">${correctChoiceText}</span></div>` : ''}
+          <div style="font-size:0.8rem; color:var(--text-muted); background:var(--card-bg); padding:8px 10px; border-radius:8px; margin-top:6px; line-height:1.4;">
+            💡 <b>คำอธิบาย:</b> ${item.question.exp}<br>
+            <span style="font-weight:bold; color:var(--primary);">📖 ${item.question.ref}</span>
+          </div>
+        `;
+        list.appendChild(card);
+      });
+
+      document.getElementById('review-modal').classList.add('active');
+    }
+
+    function closeReviewModal(e) {
+      document.getElementById('review-modal').classList.remove('active');
+    }
+
+    function shareResult() {
+      const score = document.getElementById('res-score').textContent;
+      const text = `📖 ผมได้ ${score}/10 คะแนน ใน "แบบทดสอบไบเบิล THSV11"! มาร่วมทดสอบความรู้พระคัมภีร์และร่วมสนับสนุนช่อง YouTube jewcha กันได้ที่นี่: ${window.location.href}`;
+      if (navigator.share) {
+        navigator.share({ title: 'แบบทดสอบไบเบิล THSV11', text: text, url: window.location.href }).catch(() => {});
+      } else {
+        copyToClipboard(text);
+        showToast('คัดลอกข้อความผลคะแนนแล้ว นำไปโพสต์แชร์ได้เลย!');
+      }
+    }
+
+    function shareApp() {
+      const text = `📖 ขอเชิญทดสอบความรู้พระคัมภีร์ไบเบิล ฉบับมาตรฐาน (THSV11) ทั้งพันธสัญญาเดิมและใหม่ เล่นฟรีบนเว็บ: ${window.location.href}`;
+      if (navigator.share) {
+        navigator.share({ title: 'แบบทดสอบไบเบิล THSV11', text: text, url: window.location.href }).catch(() => {});
+      } else {
+        copyToClipboard(window.location.href);
+        showToast('คัดลอกลิงก์เว็บไซต์แล้ว!');
+      }
+    }
+
+    function copyChannelLink() {
+      copyToClipboard('https://www.youtube.com/@jewcha');
+      showToast('คัดลอกลิงก์ช่อง YouTube jewcha แล้ว!');
+    }
+
+    function copyToClipboard(text) {
+      if (navigator.clipboard) {
+        navigator.clipboard.writeText(text);
+      } else {
+        const ta = document.createElement('textarea');
+        ta.value = text;
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand('copy');
+        document.body.removeChild(ta);
+      }
+    }
+
+    function showToast(msg) {
+      const toast = document.getElementById('toast');
+      toast.textContent = msg;
+      toast.classList.add('show');
+      setTimeout(() => toast.classList.remove('show'), 2600);
+    }
+
+    function toggleTheme() {
+      const current = document.documentElement.getAttribute('data-theme');
+      const next = current === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', next);
+      document.getElementById('theme-btn').textContent = next === 'dark' ? '☀️' : '🌙';
+      localStorage.setItem('theme', next);
+    }
+
+    function getCatTitle(cat) {
+      switch (cat) {
+        case 'OLD_TESTAMENT': return '📜 พันธสัญญาเดิม';
+        case 'NEW_TESTAMENT': return '✝️ พันธสัญญาใหม่';
+        case 'PEOPLE': return '👥 บุคคลสำคัญ';
+        case 'VERSES_TRIVIA': return '📖 ข้อจำ & เกร็ด';
+        default: return '🌟 รวมทุกหมวด';
+      }
+    }
+
+    // Init Theme
+    (function init() {
+      const savedTheme = localStorage.getItem('theme');
+      if (savedTheme) {
+        document.documentElement.setAttribute('data-theme', savedTheme);
+        document.getElementById('theme-btn').textContent = savedTheme === 'dark' ? '☀️' : '🌙';
+      }
+      refreshVerse();
+    })();
+  </script>
+</body>
+</html>
